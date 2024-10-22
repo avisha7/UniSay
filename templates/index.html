@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniSay - Lab Management</title>
+    <style>
+        
+        :root {
+            --accent-color: #990000;
+            --base-color: white;
+            --text-color: #660000;
+            --input-color: rgb(246, 212, 212);
+            --placeholder-color: #d3e0ea; /* Light bluish-greyish */
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--base-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: var(--accent-color);
+            color: var(--base-color);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+        
+        header h2 {
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        #homeButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .container {
+            width: 50%;
+            margin: 40px auto;
+            background: var(--base-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        input[type="text"], input[type="email"], input[type="number"], textarea, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+            background-color: var(--input-color);
+            color: var(--text-color);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: var(--placeholder-color); /* Light bluish-greyish color for placeholders */
+            opacity: 1; /* Ensures color visibility */
+        }
+        
+        textarea {
+            resize: vertical;
+        }
+        
+        button {
+            background-color: var(--accent-color);
+            color: var(--base-color);
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        button:hover {
+            background-color: #6b0000;
+            transform: scale(1.05);
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="homeButton">Home</button>
+        <h1>UniSay</h1>
+        <h2>Lab Management</h2>
+    </header>
+
+    <div class="container">
+        <h2>Report an Issue</h2>
+
+        <!-- Form Submission via PHP -->
+        <form id="issueForm" action="../submit_issue.php" method="POST">
+            <label for="enrollmentId">Enrollment ID:</label>
+            <input type="number" id="enrollmentId" name="enrollmentId" required min="0" max="99999999" maxlength="8" placeholder="Enter 8-digit ID" oninput="this.value = this.value.slice(0, 8)" required>
+
+            <label for="classroomSelect">Select Classroom:</label>
+            <select id="classroomSelect" name="classroomSelect" required>
+                <option value="" disabled selected>Select a classroom</option>
+                <option value="202">202</option>
+                <option value="203">203</option>
+                <option value="207">207</option>
+            </select>
+
+            <label for="categorySelect">Choose Category:</label>
+            <select id="categorySelect" name="categorySelect" required>
+                <option value="" disabled selected>Choose a category</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+            </select>
+
+            <label for="issueType">Select Type:</label>
+            <select id="issueType" name="issueType" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="PC-Not-Working">PC not working</option>
+                <option value="Projector-Failing">Projector failing</option>
+                <option value="Internet-Down">Internet down</option>
+                <option value="Other-Problem">Other problem</option>
+            </select>
+
+            <label for="issueDescription">Describe the Issue (optional):</label>
+            <textarea id="issueDescription" name="issueDescription" rows="4"></textarea>
+
+            <button type="submit" id="submit_form">Submit Issue</button>
+        </form>
+    </div>
+
+    <!-- JavaScript for alert -->
+    
